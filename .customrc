@@ -1,0 +1,94 @@
+#!/bin/bash
+
+# Add Custom path to path
+export PATH="$HOME/.local/bin:$PATH"
+
+DEV_FOLDER="/home/$USER/testdev/"
+
+function devopen () {
+    if [ -z "$1" ]
+    then
+        echo "No project suplied supplied"
+        return
+    fi
+
+    DEV_PATH=$DEV_FOLDER$1;
+    cd $DEV_PATH
+    echo -e '\e[37m=========================================================\e[39m\n\n    Opening project \e[36m'$1'\e[39m\n\n\e[37m========================================================='
+    printf "\033]0;${1}\007";
+    
+    # Logic to see which IDE to use
+    if [ -d ".idea" ]; then # does our working dir have an .idea directory?
+        idea . > /dev/null 2>&1 &
+    else
+        code .
+    fi
+
+    # Check if gitkraken is running, otherwise start it.
+    if pgrep -x "gitkraken" > /dev/null
+    then
+        echo "Gitkraken is already running."
+    else
+        echo "Starting Gitkraken"
+        gitkraken -p . > /dev/null 2>&1 &
+    fi
+}
+
+function dev () {
+    DEV_FIND=$(find $DEV_FOLDER -maxdepth 2 -type d | sed s:$DEV_FOLDER:: | grep -E ".*\/.*")
+    # | grep -Ev $USER)
+
+    # Add color to names
+    DEV_COLORED=$(echo $DEV_FIND | \
+        sed "s/local\//\x1b[33mlocal\/\x1b[0m/" | \
+        sed "s/remote\//\x1b[31mremote\/\x1b[0m/" \
+    )
+    DEV_INPUT=$(echo $DEV_COLORED | fzf --reverse --ansi | sed 's/\x1b\[[0-9;]*m//g')
+    echo $DEV_INPUT
+    # DEV_INPUT=$(ls $DEV_FOLDER | fzf --reverse)
+    if [[ ! -z ${DEV_INPUT} ]]; then
+        devopen $DEV_INPUT
+    fi
+}
+
+function exdev () {
+    cd ~
+    printf "\033]0;$*\007";
+}
+
+function devclone () {
+    # Check if an arguement has been passed
+    if [ -z "$1" ]
+    then
+        echo "No repo supplied"
+        return
+    fi
+
+    re="^(https|git)(:\/\/|@)([^\/:]+)[\/:]([^\/:]+)\/(.+)"
+
+    # Check if argument contains git url, if so extract the following
+    if [[ ! $1 =~ $re ]];
+    then
+        echo "Invalid Git repo"
+        return
+    fi
+
+    cd $DEV_FOLDER
+
+    # Create remote folder if it doesnt exist
+    if [ ! -d "remote" ]; then # does our working dir have an .idea directory?
+        mkdir remote
+    fi
+
+    cd remote
+
+    REPO="$(echo $1 | rev | cut -d "/" -f 1 | rev | cut -d "." -f 1)"
+
+    git clone "$1"
+
+    echo -e '\n\e[37m=========================================================\e[39m\n\n    Cloned project \e[36m'$REPO'\e[39m\n\n\e[37m=========================================================\n'
+
+
+    devopen "remote/$REPO"
+
+}
