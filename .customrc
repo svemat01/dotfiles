@@ -3,7 +3,12 @@
 # Add Custom path to path
 export PATH="$HOME/.local/bin:$PATH"
 
-DEV_FOLDER="/home/$USER/testdev/"
+DEV_FOLDER="/home/$USER/dev/"
+
+if [ ! -d $DEV_FOLDER ]; then # does our working dir have an .idea directory?
+    mkdir $DEV_FOLDER
+    echo "Dev folder not found, created: $DEV_FOLDER"
+fi
 
 function devopen () {
     if [ -z "$1" ]
