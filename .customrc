@@ -1,9 +1,12 @@
-#!/bin/bash
-
 # Add Custom path to path
 export PATH="$HOME/.local/bin:$PATH"
 
 DEV_FOLDER="/home/$USER/dev/"
+
+# Add custom colors to dev command
+# color codes are from here https://dev.to/ifenna__/adding-colors-to-bash-scripts-48g4
+# "\x1b[" is required to tell bash to use the color code.
+declare -A devFolderColors=( ["lvkdotsh"]="\x1b[94m" ["svemat01"]="\x1b[92m" )
 
 if [ ! -d $DEV_FOLDER ]; then # does our working dir have an .idea directory?
     mkdir $DEV_FOLDER
@@ -39,18 +42,41 @@ function devopen () {
     fi
 }
 
+function devColorize () {
+    if [ -z "$1" ]
+    then
+        echo "No found projects found supplied"
+        return
+    fi
+    DEV_COLORED_TEMP=$1
+
+    if [[ "$(ps -p $$ )" == *"zsh"* ]]; then
+        # Use different expansion method for zsh
+        for i in "${(@k)devFolderColors}"
+        do
+            DEV_COLORED_TEMP=$(echo $DEV_COLORED_TEMP | sed "s/$i\//${devFolderColors[$i]}$i\/\x1b[0m/")
+        done
+    else
+        # Use bash expansion method for the rest
+        for i in "${!devFolderColors[@]}"
+        do
+            DEV_COLORED_TEMP=$(echo $DEV_COLORED_TEMP | sed "s/$i\//${devFolderColors[$i]}$i\/\x1b[0m/")
+        done
+    fi
+
+    echo $DEV_COLORED_TEMP
+
+}
+
 function dev () {
     DEV_FIND=$(find $DEV_FOLDER -maxdepth 2 -type d | sed s:$DEV_FOLDER:: | grep -E ".*\/.*")
-    # | grep -Ev $USER)
 
     # Add color to names
-    DEV_COLORED=$(echo $DEV_FIND | \
-        sed "s/local\//\x1b[33mlocal\/\x1b[0m/" | \
-        sed "s/remote\//\x1b[31mremote\/\x1b[0m/" \
-    )
+    DEV_COLORED=$(devColorize $DEV_FIND)
+
     DEV_INPUT=$(echo $DEV_COLORED | fzf --reverse --ansi | sed 's/\x1b\[[0-9;]*m//g')
     echo $DEV_INPUT
-    # DEV_INPUT=$(ls $DEV_FOLDER | fzf --reverse)
+
     if [[ ! -z ${DEV_INPUT} ]]; then
         devopen $DEV_INPUT
     fi
