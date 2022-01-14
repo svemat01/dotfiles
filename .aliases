@@ -6,5 +6,6 @@ alias y='yarn'
 alias k='kubectl'
 alias kconf='code ~/kube/'
 alias haste='haste -d https://bin.helgesson.dev'
+alias docker='sudo docker'
 
 alias tarmake='tar -czvf'
