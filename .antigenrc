@@ -8,6 +8,8 @@ antigen bundle zsh-users/zsh-autosuggestions
 antigen bundle zsh-users/zsh-completions
 antigen bundle zsh-users/zsh-syntax-highlighting
 antigen bundle kubectl
+antigen bundle docker
+antigen bundle docker-compose
 
 # Load the theme
 antigen theme romkatv/powerlevel10k
