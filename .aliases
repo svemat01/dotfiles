@@ -9,3 +9,4 @@ alias haste='haste -d https://bin.helgesson.dev'
 alias docker='sudo docker'
 
 alias tarmake='tar -czvf'
+alias xclipc='xclip -selection clipboard'

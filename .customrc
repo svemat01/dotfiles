@@ -3,6 +3,8 @@ export PATH="$HOME/.local/bin:$PATH"
 
 DEV_FOLDER="/home/$USER/dev/"
 
+bindkey '^H' backward-kill-word
+
 # Add custom colors to dev command
 # color codes are from here https://dev.to/ifenna__/adding-colors-to-bash-scripts-48g4
 # "\x1b[" is required to tell bash to use the color code.

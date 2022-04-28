@@ -3,6 +3,8 @@ source /usr/share/zsh/share/antigen.zsh
 # Load the oh-my-zsh's library
 antigen use oh-my-zsh
 
+antigen bundle ohmyzsh/ohmyzsh
+
 antigen bundle git
 antigen bundle zsh-users/zsh-autosuggestions
 antigen bundle zsh-users/zsh-completions
@@ -10,6 +12,7 @@ antigen bundle zsh-users/zsh-syntax-highlighting
 antigen bundle kubectl
 antigen bundle docker
 antigen bundle docker-compose
+antigen bundle wulfgarpro/history-sync
 
 # Load the theme
 antigen theme romkatv/powerlevel10k
