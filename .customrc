@@ -70,7 +70,7 @@ function devColorize () {
 
 }
 
-function dev () {
+function dev_old () {
     DEV_FIND=$(find $DEV_FOLDER -maxdepth 2 -type d | sed s:$DEV_FOLDER:: | grep -E ".*\/.*")
 
     # Add color to names

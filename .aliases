@@ -10,3 +10,5 @@ alias docker='sudo docker'
 
 alias tarmake='tar -czvf'
 alias xclipc='xclip -selection clipboard'
+
+alias dev='zx ~/dotfiles/zx/dev.mjs'
