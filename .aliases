@@ -3,6 +3,7 @@ alias customrc='micro /home/$USER/.customrc'
 alias pacman='sudo pacman'
 
 alias y='yarn'
+alias p='pnpm'
 alias k='kubectl'
 alias kconf='code ~/kube/'
 alias haste='haste -d https://bin.helgesson.dev'
