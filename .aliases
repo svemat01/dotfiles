@@ -16,3 +16,6 @@ alias rmm='/usr/bin/rm'
 alias rm='trash'
 
 alias dev='zx ~/dotfiles/zx/dev.mjs'
+
+alias svdown="wpctl set-volume $(wpctl status | grep spotify | tail -1 | sed 's/[^0-9]*//g') 5%-"
+alias svup="wpctl set-volume $(wpctl status | grep spotify | tail -1 | sed 's/[^0-9]*//g') 5%+"
