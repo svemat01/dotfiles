@@ -3,6 +3,11 @@ export PATH="$HOME/.local/bin:$PATH"
 
 DEV_FOLDER="/home/$USER/dev/"
 
+# Overwrite normal ZSH settings
+HISTFILE=~/.zsh_history
+HISTSIZE=50000
+SAVEHIST=50000
+
 bindkey '^H' backward-kill-word
 
 # Add custom colors to dev command
