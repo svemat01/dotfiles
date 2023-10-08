@@ -1,0 +1,10 @@
+source "$(dirname "$0")/.commonrc"
+
+# If mac load mac config
+if [[ $(uname) == "Darwin" ]]; then
+    source "$(dirname "$0")/.macrc"
+# If linux load linux config
+elif [[ $(uname) == "Linux" ]]; then
+    source "$(dirname "$0")/.linuxrc"
+fi
+
