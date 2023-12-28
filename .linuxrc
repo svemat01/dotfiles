@@ -1,1 +1,2 @@
 bindkey '^H' backward-kill-word
+source /usr/share/zsh/share/antigen.zsh

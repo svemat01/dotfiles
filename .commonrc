@@ -24,13 +24,13 @@ alias p='pnpm'
 alias k='kubectl'
 
 # Custom ls
-if command -v exa &>/dev/null; then
-    alias ls='exa -al --color=always --group-directories-first'
-    alias la='exa -a --color=always --group-directories-first'
-    alias ll='exa -l --color=always --group-directories-first'
-    alias lt='exa -aT --color=always --group-directories-first'
+if command -v eza &>/dev/null; then
+    alias ls='eza -al --color=always --group-directories-first'
+    alias la='eza -a --color=always --group-directories-first'
+    alias ll='eza -l --color=always --group-directories-first'
+    alias lt='eza -aT --color=always --group-directories-first'
 else
-    echo "No EXA installed, using normal ls command"
+    echo "No EZA installed, using normal ls command"
 fi
 
 # Custom ZX scripts
@@ -38,34 +38,4 @@ if command -v zx &>/dev/null; then
     alias dev="zx $(dirname "$0")/zx/dev.mjs"
 else
     echo "No ZX installed, skipping custom scripts"
-fi
-
-# ====================
-# Antigen plugins
-# ====================
-
-if command -v antigen &>/dev/null; then
-    source /usr/share/zsh/share/antigen.zsh
-
-    # Load the oh-my-zsh's library
-    antigen use oh-my-zsh
-
-    antigen bundle ohmyzsh/ohmyzsh
-
-    antigen bundle git
-    antigen bundle zsh-users/zsh-autosuggestions
-    antigen bundle zsh-users/zsh-completions
-    antigen bundle zsh-users/zsh-syntax-highlighting
-    antigen bundle kubectl
-    antigen bundle docker
-    antigen bundle docker-compose
-    antigen bundle wulfgarpro/history-sync
-
-    # Load the theme
-    antigen theme romkatv/powerlevel10k
-
-    # Tell antigen that you're done
-    antigen apply
-else
-    echo "No Antigen installed, skipping plugins"
 fi

@@ -1,0 +1,2 @@
+source /opt/homebrew/share/antigen/antigen.zsh
+alias tailscale="/Applications/Tailscale.app/Contents/MacOS/Tailscale"

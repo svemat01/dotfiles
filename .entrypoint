@@ -8,3 +8,4 @@ elif [[ $(uname) == "Linux" ]]; then
     source "$(dirname "$0")/.linuxrc"
 fi
 
+source "$(dirname "$0")/.antigenrc"
