@@ -1,2 +1,2 @@
-source /opt/homebrew/share/antigen/antigen.zsh
 alias tailscale="/Applications/Tailscale.app/Contents/MacOS/Tailscale"
+export PATH="$HOMEBREW_PREFIX/opt/python@3.11/libexec/bin:$PATH"

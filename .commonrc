@@ -25,9 +25,9 @@ alias k='kubectl'
 
 # Custom ls
 if command -v eza &>/dev/null; then
-    alias ls='eza -al --color=always --group-directories-first'
+    alias ls='eza --color=always --group-directories-first'
     alias la='eza -a --color=always --group-directories-first'
-    alias ll='eza -l --color=always --group-directories-first'
+    alias ll='eza -la --color=always --group-directories-first'
     alias lt='eza -aT --color=always --group-directories-first'
 else
     echo "No EZA installed, using normal ls command"

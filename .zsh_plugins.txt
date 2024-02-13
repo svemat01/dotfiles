@@ -1,0 +1,34 @@
+sindresorhus/pure
+
+### Framework: zsh-utils
+#
+# zsh-utils is a micro-framework that is also well suited to pair with antidote. It
+# provides much of the same core functionality from other bigger frameworks without the
+# bloat or performance hit. Using zsh-utils, you may find you don't need much else.
+# If you want a really thin framework, this is great.
+#
+###
+belak/zsh-utils path:history
+belak/zsh-utils path:utility
+belak/zsh-utils path:editor
+
+zdharma-continuum/fast-syntax-highlighting kind:defer
+
+# zsh-users/zsh-completions is a popular plugin for adding supplemental completions.
+# We combine the `path:` and `kind:fpath` annotations here:
+zsh-users/zsh-completions path:src kind:fpath
+
+# Compinit plugins should be near the end of .zsh_plugins.txt so that $fpath has been
+# fully populated. Use zsh-utils for its completion plugin.
+belak/zsh-utils path:completion
+
+### Final Plugins
+#
+# Remember plugin order matters! Put plugins that need run last at the bottom of your
+# .zsh_plugins.txt file.
+#
+###
+
+# These popular core plugins should be loaded at the end
+zsh-users/zsh-autosuggestions kind:defer
+zsh-users/zsh-history-substring-search
